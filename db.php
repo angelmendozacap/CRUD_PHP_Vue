@@ -1,12 +1,5 @@
 <?php
-## Variables de entorno
-const DB_ENV = [
-  "db" => "vue_students",
-  "host" => "127.0.0.1",
-  "port" => "3306",
-  "username" => "root",
-  "password" => "secret"
-];
+require_once('./config.php');
 ## Obtiene la conexión a la BD
 function getConnection() {
   try {
