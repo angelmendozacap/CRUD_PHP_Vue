@@ -18,7 +18,7 @@ switch ($action) {
     echo updateStudent();
     break;
   case 'delete':
-    
+    echo deleteStudent();
     break;
   default:
     echo infoMessage('Esta acción no existe', '404', 'Not Found');

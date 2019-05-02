@@ -60,7 +60,7 @@ function updateStudent() {
         if ($result) {
           return infoMessage('Estudiante actualizado con éxito', '200', 'Ok');
         } else {
-          return infoMessage('Error al registrar al estudiante', '500', 'Internal Server Error');
+          return infoMessage('Error al actualizar al estudiante', '500', 'Internal Server Error');
         }
       } else {
         return infoMessage('Datos incompletos para la actualización', '400', 'Bad Request');      
@@ -74,7 +74,25 @@ function updateStudent() {
 }
 // DELETE
 function deleteStudent() {
+  try {
+    if (isset($_POST['id'])) {
+      $id = $_POST['id'];
 
+      $db = getConnection();
+      $query = "DELETE FROM students WHERE id = ?";
+      $stmt = $db->prepare($query);
+      $result = $stmt->execute([$id]);
+      if ($result) {
+        return infoMessage('Estudiante eliminado con éxito', '200', 'Ok');
+      } else {
+        return infoMessage('Error al eliminar al estudiante', '500', 'Internal Server Error');
+      }
+    } else {
+      return infoMessage('Datos incompletos para la eliminación', '400', 'Bad Request');
+    }
+  } catch (PDOException $e) {
+    die('Error-> '.$e->getMessage());
+  } 
 }
 
 ## Mensaje de información
