@@ -15,12 +15,12 @@ switch ($action) {
     echo createStudent();
     break;
   case 'update':
-    
+    echo updateStudent();
     break;
   case 'delete':
     
     break;
   default:
-    echo infoMessage('Esta acción no existe', '400', 'Bad Request');
+    echo infoMessage('Esta acción no existe', '404', 'Not Found');
     break;
 }

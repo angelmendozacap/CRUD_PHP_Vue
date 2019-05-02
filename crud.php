@@ -4,7 +4,7 @@
 // READ
 function getStudents() {
   try {
-    $query = "SELECT name, email, web, created_at FROM students";
+    $query = "SELECT id, name, email, web, created_at FROM students";
     $db = getConnection();
     $stmt = $db->query($query);
     if ($stmt) {
@@ -45,9 +45,37 @@ function createStudent() {
 }
 // UPDATE
 function updateStudent() {
-  
+  try {
+    if (isset($_GET['id'])) {
+      $id = $_GET['id'];
+      if (isset($_POST['name']) && isset($_POST['email'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $web = $_POST['web'];
+        
+        $db = getConnection();
+        $query = "UPDATE students SET name = ?, email = ?, web = ? WHERE id = ?";
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute([$name, $email, $web, $id]);
+        if ($result) {
+          return infoMessage('Estudiante actualizado con éxito', '200', 'Ok');
+        } else {
+          return infoMessage('Error al registrar al estudiante', '500', 'Internal Server Error');
+        }
+      } else {
+        return infoMessage('Datos incompletos para la actualización', '400', 'Bad Request');      
+      }
+    } else {
+      return infoMessage('No se puede editar al estudiante', '400', 'Bad Request');
+    }
+  } catch (PDOException $e) {
+    die('Error-> '.$e->getMessage());
+  } 
 }
+// DELETE
+function deleteStudent() {
 
+}
 
 ## Mensaje de información
 function infoMessage($msg,$code,$status) {
