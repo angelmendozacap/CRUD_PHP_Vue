@@ -99,7 +99,7 @@ function deleteStudent() {
 function infoMessage($msg,$code,$status) {
   $err = [
     'message' => $msg,
-    'code' => $code
+    'code' => intval($code)
   ];
   header('Content-Type: application/json');
   header($_SERVER["SERVER_PROTOCOL"].' '.$code.' '.$status);
