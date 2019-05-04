@@ -27,7 +27,6 @@
 }
 
 .ModalWindow-container {
-  margin: 5vh auto 0;
   width: 60%;
   background-color: #FFF;
 }
@@ -50,7 +49,9 @@
 }
 
 .u-show {
-  display: initial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .fade-enter-active,
